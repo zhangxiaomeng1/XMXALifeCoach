@@ -55,6 +55,7 @@ app.post('/chat', async (req, res) => {
                         }
                     } catch (e) {
                         // 忽略解析错误
+                        currentText += '网络错误';
                     }
                 }
             }
@@ -81,6 +82,7 @@ app.post('/chat', async (req, res) => {
                         }
                     } catch (e) {
                         // 忽略解析错误
+                        currentText += '网络错误';
                     }
                 }
             }
