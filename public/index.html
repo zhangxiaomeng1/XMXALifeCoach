@@ -235,9 +235,13 @@
                     
                     for (const line of lines) {
                         if (line.startsWith('data: ')) {
-                            const data = line.slice(6);
-                            assistantResponse += data;
-                            messageContent.textContent = assistantResponse;
+                            try {
+                                const data = line.slice(6);
+                                assistantResponse += data;
+                                messageContent.textContent = assistantResponse;
+                            } catch (e) {
+                                console.error('Error parsing JSON:', e);
+                            }
                         }
                     }
 
