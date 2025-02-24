@@ -1,3 +1,4 @@
+require('dotenv').config();
 const express = require('express');
 const cors = require('cors');
 const fetch = (...args) => import('node-fetch').then(({default: fetch}) => fetch(...args));
@@ -5,8 +6,8 @@ const fetch = (...args) => import('node-fetch').then(({default: fetch}) => fetch
 const app = express();
 const port = 3000;
 
-const API_KEY = '1e80f551-0afe-4c79-b169-477654514942';
-const API_URL = 'https://ark.cn-beijing.volces.com/api/v3/chat/completions';
+const API_KEY = process.env.API_KEY;
+const API_URL = process.env.API_URL;
 
 // 启用CORS和JSON解析中间件
 app.use(cors());
