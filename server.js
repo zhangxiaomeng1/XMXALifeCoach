@@ -3,24 +3,9 @@ const cors = require('cors');
 require('dotenv').config();
 
 const app = express();
-<<<<<<< HEAD
-const port = 3000;
-
-const API_KEY = '1e80f551-0afe-4c79-b169-477654514942';
-const API_URL = 'https://ark.cn-beijing.volces.com/api/v3/chat/completions';
-
-// 启用CORS和JSON解析中间件
-=======
->>>>>>> 12ae56bc1093c1a63cacf5c81b316a3c08280f40
 app.use(cors());
 app.use(express.json());
 app.use(express.static('public'));
-
-// Add error handling middleware
-app.use((err, req, res, next) => {
-    console.error(err.stack);
-    res.status(500).send('服务器内部错误');
-});
 
 // 处理AI对话请求
 app.post('/api/chat', async (req, res) => {
