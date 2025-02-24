@@ -216,6 +216,10 @@
                     body: JSON.stringify({ messages })
                 });
 
+                if (!response.ok) {
+                    throw new Error(`HTTP error! status: ${response.status}`);
+                }
+
                 // 创建新的消息元素
                 const messageElement = createMessageElement('assistant', '');
                 chatMessages.appendChild(messageElement);
@@ -255,12 +259,12 @@
             } catch (error) {
                 console.error('Error:', error);
                 addMessage('assistant', '抱歉，发生了一些错误。请稍后再试。');
+            } finally {
+                // 启用输入和发送按钮
+                messageInput.disabled = false;
+                sendButton.disabled = false;
+                messageInput.focus();
             }
-
-            // 启用输入和发送按钮
-            messageInput.disabled = false;
-            sendButton.disabled = false;
-            messageInput.focus();
         }
 
         // 创建消息元素
