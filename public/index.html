@@ -2,303 +2,246 @@
 <html lang="zh-CN">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>XMXALifeCoach - 个人成长辅导</title>
-    <style>
-        /* 全局样式 */
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        body {
-            font-family: 'PingFang SC', 'Microsoft YaHei', sans-serif;
-            line-height: 1.6;
-            background-color: #f5f5f5;
-            color: #333;
-        }
-
-        /* 页面布局 */
-        .container {
-            max-width: 800px;
-            margin: 0 auto;
-            padding: 20px;
-            min-height: 100vh;
-            display: flex;
-            flex-direction: column;
-        }
-
-        /* 顶部标题 */
-        header {
-            text-align: center;
-            padding: 20px 0;
-            margin-bottom: 20px;
-        }
-
-        header h1 {
-            color: #2c3e50;
-            margin-bottom: 10px;
-        }
-
-        header p {
-            color: #7f8c8d;
-        }
-
-        /* 聊天区域 */
-        .chat-container {
-            flex: 1;
-            background: #fff;
-            border-radius: 10px;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-            display: flex;
-            flex-direction: column;
-            overflow: hidden;
-        }
-
-        /* 聊天记录 */
-        .chat-messages {
-            flex: 1;
-            padding: 20px;
-            overflow-y: auto;
-            max-height: 60vh;
-        }
-
-        .message {
-            margin-bottom: 20px;
-            display: flex;
-            align-items: flex-start;
-        }
-
-        .message.user {
-            flex-direction: row-reverse;
-        }
-
-        .message-content {
-            max-width: 70%;
-            padding: 12px 16px;
-            border-radius: 10px;
-            margin: 0 12px;
-        }
-
-        .user .message-content {
-            background: #3498db;
-            color: #fff;
-        }
-
-        .assistant .message-content {
-            background: #f1f1f1;
-            color: #333;
-        }
-
-        /* 输入区域 */
-        .input-container {
-            padding: 20px;
-            background: #fff;
-            border-top: 1px solid #eee;
-            display: flex;
-            gap: 10px;
-        }
-
-        #message-input {
-            flex: 1;
-            padding: 12px;
-            border: 1px solid #ddd;
-            border-radius: 5px;
-            font-size: 16px;
-            resize: none;
-        }
-
-        #send-button {
-            padding: 12px 24px;
-            background: #3498db;
-            color: #fff;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-            font-size: 16px;
-            transition: background 0.3s;
-        }
-
-        #send-button:hover {
-            background: #2980b9;
-        }
-
-        #send-button:disabled {
-            background: #bdc3c7;
-            cursor: not-allowed;
-        }
-
-        /* 底部版权信息 */
-        footer {
-            text-align: center;
-            padding: 20px 0;
-            color: #7f8c8d;
-            font-size: 14px;
-        }
-
-        /* 加载状态 */
-        .typing-indicator {
-            display: none;
-            padding: 12px 16px;
-            background: #f1f1f1;
-            border-radius: 10px;
-            margin: 0 12px;
-            color: #666;
-        }
-
-        .typing-indicator.active {
-            display: block;
-        }
-    </style>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>AI 人生教练</title>
+    <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <div class="container">
-        <header>
-            <h1>XMXALifeCoach</h1>
-            <p>你的个人成长导师，随时为你提供建议和指导</p>
-        </header>
-
-        <div class="chat-container">
-            <div class="chat-messages" id="chat-messages">
-                <!-- 消息将在这里动态添加 -->
-            </div>
-
-            <div class="input-container">
-                <textarea id="message-input" placeholder="输入你的问题..." rows="3"></textarea>
-                <button id="send-button">发送</button>
-            </div>
+    <!-- 在chat-container顶部添加标题区 -->
+    <div class="chat-container">
+        <div class="header">
+            <h1>智慧成长伴侣</h1>
+            <div class="subtitle">AI 人生教练系统</div>
         </div>
-
-        <footer>
-            <p>&copy; 2024 XMXALifeCoach. All rights reserved.</p>
-        </footer>
+        <div class="messages" id="messages"></div>
+        <div class="input-area">
+            <input type="text" id="userInput" placeholder="请分享您今天的成长困惑...">
+            <button onclick="sendMessage()">发送</button>
+        </div>
     </div>
 
     <script>
-        // 初始化变量
-        const chatMessages = document.getElementById('chat-messages');
-        const messageInput = document.getElementById('message-input');
-        const sendButton = document.getElementById('send-button');
-        let messages = [];
-
-        // 系统初始消息
-        const systemMessage = {
-            role: 'system',
-            content: '你是一位专业的生活教练，擅长倾听、共情和提供建议。你的目标是通过对话帮助用户实现个人成长。请以友好、专业的态度与用户交流，理解他们的需求和困扰，并提供有针对性的建议和指导。'
+        // 在 script 标签开始部分添加
+        const STORAGE_KEY = 'ai_coach_history';
+        
+        // 修改 conversationHistory 初始化方式
+        let conversationHistory = JSON.parse(localStorage.getItem(STORAGE_KEY)) || [
+            { role: "system", content: "你是一位专业的人生教练，需要通过对话帮助用户成长。使用亲切的中文，每次回答不超过200字。" }
+        ];
+        
+        // 在页面加载时加载历史消息
+        window.onload = () => {
+            conversationHistory.filter(msg => msg.role !== 'system').forEach(msg => {
+                appendMessage(msg.role, msg.content);
+            });
         };
-        messages.push(systemMessage);
-
-        // 添加欢迎消息
-        addMessage('assistant', '你好！我是你的个人成长教练。请告诉我你最近遇到了什么困扰，或者你希望在哪些方面得到提升？');
-
-        // 发送消息函数
+        
+        // 修改 sendMessage 函数中的保存逻辑
         async function sendMessage() {
-            const content = messageInput.value.trim();
-            if (!content) return;
-
-            // 禁用输入和发送按钮
-            messageInput.disabled = true;
-            sendButton.disabled = true;
+            const userInput = document.getElementById('userInput');
+            const message = userInput.value.trim();
+            if (!message) return;
 
             // 添加用户消息
-            addMessage('user', content);
-            messages.push({ role: 'user', content });
-            messageInput.value = '';
+            appendMessage('user', message);
+            conversationHistory.push({ role: "user", content: message });
+            userInput.value = '';
+
+            // 显示加载状态
+            // 修改消息添加方式
+            const loadingElem = safeAppendMessage('assistant', '思考中...');
+            if (!loadingElem) return;
 
             try {
-                // 创建EventSource连接
-                const response = await fetch('/chat', {
+                // 添加超时处理
+                const controller = new AbortController();
+                const timeoutId = setTimeout(() => controller.abort(), 60000);
+
+                const response = await fetch('/api/chat', {
                     method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json'
-                    },
-                    body: JSON.stringify({ messages })
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ messages: conversationHistory }),
+                    signal: controller.signal
                 });
+                clearTimeout(timeoutId);
 
-                if (!response.ok) {
-                    throw new Error(`HTTP error! status: ${response.status}`);
-                }
-
-                // 创建新的消息元素
-                const messageElement = createMessageElement('assistant', '');
-                chatMessages.appendChild(messageElement);
-                const messageContent = messageElement.querySelector('.message-content');
-
-                // 处理流式响应
+                // 强化流式处理
                 const reader = response.body.getReader();
-                const decoder = new TextDecoder();
-                let assistantResponse = '';
-                console.log(`服务器数据:${reader}`);
-
+                let fullResponse = '';
+                loadingElem.textContent = '';
+                
                 while (true) {
                     const { done, value } = await reader.read();
                     if (done) break;
-
-                    const chunk = decoder.decode(value);
-                    const lines = chunk.split('\n');
+                    const chunk = new TextDecoder().decode(value);
                     
-                    for (const line of lines) {
-                        if (line.startsWith('data: ')) {
-                            try {
-                                const data = line.slice(6);
-                                assistantResponse += data;
-                                messageContent.textContent = assistantResponse;
-                            } catch (e) {
-                                console.error('Error parsing JSON:', e);
-                            }
+                    // 修改后的数据块处理逻辑
+                    chunk.split('\n').forEach(line => {
+                        const trimmedLine = line.trim();
+                        if (!trimmedLine || trimmedLine === 'data: [DONE]') return;
+                        
+                        try {
+                            // 移除 "data: " 前缀
+                            const jsonString = trimmedLine.replace(/^data: /, '');
+                            const data = JSON.parse(jsonString);
+                            // 添加空值检查
+                            const content = data.choices[0]?.delta?.content || '';
+                            fullResponse += content;
+                            // 实时更新内容
+                            loadingElem.textContent = fullResponse; 
+                        } catch(e) {
+                            console.warn('解析错误:', e);
+                            console.log('原始数据:', line);
                         }
-                    }
-
-                    // 滚动到底部
-                    chatMessages.scrollTop = chatMessages.scrollHeight;
+                    });
                 }
-
-                // 保存助手回复
-                messages.push({ role: 'assistant', content: assistantResponse });
-
+                
+                conversationHistory.push({ role: "assistant", content: fullResponse });
+                // 添加保存到本地存储
+                localStorage.setItem(STORAGE_KEY, JSON.stringify(conversationHistory));
+                
             } catch (error) {
-                console.error('Error:', error);
-                addMessage('assistant', '抱歉，发生了一些错误。请稍后再试。');
-            } finally {
-                // 启用输入和发送按钮
-                messageInput.disabled = false;
-                sendButton.disabled = false;
-                messageInput.focus();
+                // 细化错误处理
+                loadingElem.textContent = error.name === 'AbortError' ? 
+                    '请求超时，请稍后再试' : 
+                    '服务暂时不可用，请检查网络连接';
             }
         }
 
-        // 创建消息元素
-        function createMessageElement(role, content) {
+        // 修改 appendMessage 函数支持自动滚动
+        // 将 appendMessage 移到 safeAppendMessage 之前
+        function appendMessage(role, content) {
+            const messagesDiv = document.getElementById('messages');
             const messageDiv = document.createElement('div');
             messageDiv.className = `message ${role}`;
-            messageDiv.innerHTML = `
-                <div class="message-content">${content}</div>
-            `;
+            messageDiv.textContent = content;
+            messagesDiv.appendChild(messageDiv);
+            messagesDiv.scrollTop = messagesDiv.scrollHeight;
             return messageDiv;
         }
-
-        // 添加消息到聊天界面
-        function addMessage(role, content) {
-            const messageElement = createMessageElement(role, content);
-            chatMessages.appendChild(messageElement);
-            chatMessages.scrollTop = chatMessages.scrollHeight;
+        
+        // 修改 safeAppendMessage 定义
+        function safeAppendMessage(role, content) {
+            try {
+                return appendMessage(role, content);
+            } catch (error) {
+                console.error('消息添加失败:', error);
+                return null;
+            }
         }
 
-        // 事件监听器
-        sendButton.addEventListener('click', sendMessage);
-        messageInput.addEventListener('keypress', (e) => {
+        async function sendMessage() {
+            const userInput = document.getElementById('userInput');
+            const message = userInput.value.trim();
+            if (!message) return;
+
+            // 添加用户消息
+            appendMessage('user', message);
+            conversationHistory.push({ role: "user", content: message });
+            userInput.value = '';
+
+            // 显示加载状态
+            // 修改消息添加方式
+            const loadingElem = safeAppendMessage('assistant', '思考中...');
+            if (!loadingElem) {
+                console.error('无法创建加载状态');
+                return;
+            }
+
+            try {
+                // 添加超时处理
+                const controller = new AbortController();
+                const timeoutId = setTimeout(() => controller.abort(), 60000);
+
+                const response = await fetch('/api/chat', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ messages: conversationHistory }),
+                    signal: controller.signal
+                });
+                clearTimeout(timeoutId);
+
+                // 强化流式处理
+                const reader = response.body.getReader();
+                let fullResponse = '';
+                loadingElem.textContent = '';
+                
+                while (true) {
+                    const { done, value } = await reader.read();
+                    if (done) break;
+                    const chunk = new TextDecoder().decode(value);
+                    
+                    // 修改后的数据块处理逻辑
+                    chunk.split('\n').forEach(line => {
+                        const trimmedLine = line.trim();
+                        if (!trimmedLine || trimmedLine === 'data: [DONE]') return;
+                        
+                        try {
+                            // 移除 "data: " 前缀
+                            const jsonString = trimmedLine.replace(/^data: /, '');
+                            const data = JSON.parse(jsonString);
+                            // 添加空值检查
+                            const content = data.choices[0]?.delta?.content || '';
+                            fullResponse += content;
+                            // 实时更新内容
+                            loadingElem.textContent = fullResponse; 
+                        } catch(e) {
+                            console.warn('解析错误:', e);
+                            console.log('原始数据:', line);
+                        }
+                    });
+                }
+                
+                conversationHistory.push({ role: "assistant", content: fullResponse });
+                // 添加保存到本地存储
+                localStorage.setItem(STORAGE_KEY, JSON.stringify(conversationHistory));
+                
+            } catch (error) {
+                // 细化错误处理
+                loadingElem.textContent = error.name === 'AbortError' ? 
+                    '请求超时，请稍后再试' : 
+                    '服务暂时不可用，请检查网络连接';
+            }
+        }
+
+        const userInput = document.getElementById('userInput');
+        userInput.addEventListener('keypress', (e) => {
             if (e.key === 'Enter' && !e.shiftKey) {
                 e.preventDefault();
                 sendMessage();
             }
         });
-
-        // 输入框自动调整高度
-        messageInput.addEventListener('input', () => {
-            messageInput.style.height = 'auto';
-            messageInput.style.height = messageInput.scrollHeight + 'px';
-        });
+        
+        // 添加历史记录管理功能
+        function refreshHistoryPanel() {
+            const historyList = document.getElementById('historyList');
+            historyList.innerHTML = conversationHistory
+                .filter(msg => msg.role === 'user')
+                .map((msg, index) => 
+                    `<div class="history-item" onclick="loadHistory(${index})">
+                        ${msg.content.substring(0, 20)}${msg.content.length > 20 ? '...' : ''}
+                    </div>`
+                )
+                .join('');
+        }
+        
+        function loadHistory(index) {
+            const messagesDiv = document.getElementById('messages');
+            messagesDiv.innerHTML = '';
+            conversationHistory.slice(0, index + 2).forEach(msg => {
+                if(msg.role !== 'system') appendMessage(msg.role, msg.content);
+            });
+        }
+        
+        function clearHistory() {
+            localStorage.removeItem(STORAGE_KEY);
+            conversationHistory = conversationHistory.slice(0, 1);
+            refreshHistoryPanel();
+            document.getElementById('messages').innerHTML = '';
+        }
+        
+        // 在 sendMessage 函数最后添加
+        refreshHistoryPanel();
     </script>
 </body>
 </html>
