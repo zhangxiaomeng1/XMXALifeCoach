@@ -4,6 +4,7 @@ const fetch = (...args) => import('node-fetch').then(({default: fetch}) => fetch
 
 const app = express();
 const port = 3000;
+
 const API_KEY = '1e80f551-0afe-4c79-b169-477654514942';
 const API_URL = 'https://ark.cn-beijing.volces.com/api/v3/chat/completions';
 
