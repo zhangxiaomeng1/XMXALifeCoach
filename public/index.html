@@ -2,116 +2,236 @@
 <html lang="zh-CN">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>AI 人生教练</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="张晓萌的 OPC 总控系统：A19 产品矩阵、FDE 高客单现金流、AI Growth OS 自动增长聊天。">
+    <title>张晓萌 OPC 总控系统</title>
+    <link rel="preload" as="image" href="assets/opc-command-center.png">
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <!-- 在chat-container顶部添加标题区 -->
-    <div class="chat-container">
-        <div class="header">
-            <h1>智慧成长伴侣</h1>
-            <div class="subtitle">AI 人生教练系统</div>
-        </div>
-        <div class="messages" id="messages"></div>
-        <div class="input-area">
-            <input type="text" id="userInput" placeholder="请分享您今天的成长困惑...">
-            <button onclick="sendMessage()">发送</button>
-        </div>
-    </div>
+    <header class="hero" id="top">
+        <nav class="nav" aria-label="主导航">
+            <a class="brand" href="#top" aria-label="张晓萌 OPC 总控系统首页">
+                <span class="brand-mark">OPC</span>
+                <span>张晓萌</span>
+            </a>
+            <div class="nav-links">
+                <a href="#a19">A19</a>
+                <a href="#fde">FDE</a>
+                <a href="#growth-os">AI Growth OS</a>
+                <a href="#chat">聊天</a>
+            </div>
+        </nav>
+
+        <div class="hero-media" aria-hidden="true"></div>
+        <div class="hero-shade" aria-hidden="true"></div>
+
+        <section class="hero-content" aria-labelledby="hero-title">
+            <p class="eyebrow">One Person Company Command System</p>
+            <h1 id="hero-title">张晓萌 OPC 总控系统</h1>
+            <p class="hero-copy">
+                用 AI 原生工作流运营海外 App 产品矩阵、FDE 高客单服务和自动增长系统，把一个人的判断、工程、销售与增长压缩成可持续执行的公司节奏。
+            </p>
+            <div class="hero-actions" aria-label="主要行动">
+                <a class="button primary" href="#chat">进入自动增长聊天</a>
+                <a class="button secondary" href="#dashboard">查看总控面板</a>
+            </div>
+        </section>
+
+        <aside class="signal-panel" aria-label="当前运营焦点">
+            <div>
+                <span class="signal-label">90 天主线</span>
+                <strong>$1M+ / year OPC</strong>
+            </div>
+            <div>
+                <span class="signal-label">当前策略</span>
+                <strong>1 个主产品 + 1 个 FDE motion + 1 个自动化</strong>
+            </div>
+        </aside>
+    </header>
+
+    <main>
+        <section class="section intro-band" id="dashboard">
+            <div class="section-heading">
+                <p class="eyebrow">Operating Dashboard</p>
+                <h2>三台发动机，一个总控节奏</h2>
+            </div>
+            <div class="engine-grid">
+                <article class="engine-card">
+                    <span class="engine-index">01</span>
+                    <h3>A19 产品矩阵</h3>
+                    <p>19 个海外 AI App 机会位，只保留 1-3 个活跃产品，用收入、复用度和 4 周验证速度做取舍。</p>
+                    <ul>
+                        <li>优先已有收入产品</li>
+                        <li>每周一个收入敏感实验</li>
+                        <li>沉淀 App 模板与增长资产</li>
+                    </ul>
+                </article>
+                <article class="engine-card">
+                    <span class="engine-index">02</span>
+                    <h3>FDE 高客单现金流</h3>
+                    <p>以 Forward Deployed AI/Mobile Engineer 身份，帮助出海团队 4-8 周交付 AI 原生移动产品。</p>
+                    <ul>
+                        <li>$5k-$20k 服务包</li>
+                        <li>MVP、变现审计、AI 工程自动化</li>
+                        <li>案例页、Demo、外联流水线</li>
+                    </ul>
+                </article>
+                <article class="engine-card">
+                    <span class="engine-index">03</span>
+                    <h3>AI Growth OS</h3>
+                    <p>把收入分析、ASO、竞品、内容、销售外联和开发验证自动化，形成一个人的增长操作系统。</p>
+                    <ul>
+                        <li>周报与决策记录</li>
+                        <li>自动生成增长素材</li>
+                        <li>聊天驱动任务拆解与复盘</li>
+                    </ul>
+                </article>
+            </div>
+        </section>
+
+        <section class="section matrix-band" id="a19">
+            <div class="section-heading">
+                <p class="eyebrow">A19 Product Matrix</p>
+                <h2>海外 AI App 产品矩阵</h2>
+                <p>不是同时做 19 个项目，而是维护 19 个可复用产品位置，并让当前现金流产品、战略产品和快速验证产品有清晰边界。</p>
+            </div>
+            <div class="matrix-layout">
+                <div class="active-products">
+                    <h3>当前只激活三类</h3>
+                    <div class="active-row">
+                        <span>主收入产品</span>
+                        <strong>已有收入 App / App family</strong>
+                    </div>
+                    <div class="active-row">
+                        <span>战略上行产品</span>
+                        <strong>AIFriends / AI Companion</strong>
+                    </div>
+                    <div class="active-row">
+                        <span>4 周验证产品</span>
+                        <strong>AI Fitness / Life Recorder / Utility</strong>
+                    </div>
+                </div>
+                <div class="product-tags" aria-label="A19 产品机会位">
+                    <span>AI Cleaner</span>
+                    <span>AI Private Photo</span>
+                    <span>AI Screenshot</span>
+                    <span>AI Video Compressor</span>
+                    <span>AI File Organizer</span>
+                    <span>AIFriends</span>
+                    <span>AI Role Creator</span>
+                    <span>AI Chat Story</span>
+                    <span>AI Emotional Companion</span>
+                    <span>AI Voice Companion</span>
+                    <span>AI BodyLooks</span>
+                    <span>AI Fitness Coach</span>
+                    <span>AI Health Log</span>
+                    <span>AI Stress Tracker</span>
+                    <span>AI Beauty</span>
+                    <span>Life Recorder</span>
+                    <span>AI Time Coach</span>
+                    <span>AI Goal Tracker</span>
+                    <span>AI Content Memory</span>
+                </div>
+            </div>
+        </section>
+
+        <section class="section fde-band" id="fde">
+            <div class="section-heading">
+                <p class="eyebrow">FDE Cashflow</p>
+                <h2>高客单 AI / Mobile 交付服务</h2>
+            </div>
+            <div class="offer-grid">
+                <article class="offer">
+                    <span class="offer-price">$5k-$15k</span>
+                    <h3>AI App MVP Sprint</h3>
+                    <p>2-4 周交付可运行 MVP：AI 接入、订阅基础、发布路径和增长验证。</p>
+                </article>
+                <article class="offer">
+                    <span class="offer-price">$2k-$5k</span>
+                    <h3>App Monetization Audit</h3>
+                    <p>1 周完成 Paywall、ASO、订阅、数据、评论和竞品拆解，输出可执行实验清单。</p>
+                </article>
+                <article class="offer">
+                    <span class="offer-price">$5k-$20k</span>
+                    <h3>AI Engineering Automation</h3>
+                    <p>搭建 Codex / Claude 任务流水线、仓库规则、验证脚本和团队周节奏。</p>
+                </article>
+            </div>
+        </section>
+
+        <section class="section os-band" id="growth-os">
+            <div class="section-heading">
+                <p class="eyebrow">AI Growth OS</p>
+                <h2>一个人的自动增长操作系统</h2>
+            </div>
+            <div class="os-grid">
+                <div class="os-list">
+                    <h3>自动化优先级</h3>
+                    <ol>
+                        <li>收入数据周报</li>
+                        <li>ASO 与竞品监控</li>
+                        <li>App 评论分析</li>
+                        <li>截图与文案生成</li>
+                        <li>FDE 外联与案例草稿</li>
+                        <li>开发任务验证流水线</li>
+                    </ol>
+                </div>
+                <div class="cadence">
+                    <h3>每周节奏</h3>
+                    <div class="cadence-grid">
+                        <span>Mon CEO</span>
+                        <span>Tue Product</span>
+                        <span>Wed Growth</span>
+                        <span>Thu FDE</span>
+                        <span>Fri Ship</span>
+                        <span>Sat OS</span>
+                        <span>Sun Review</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="section chat-band" id="chat">
+            <div class="chat-shell">
+                <div class="chat-intro">
+                    <p class="eyebrow">AI Growth OS Chat</p>
+                    <h2>把想法变成下一步动作</h2>
+                    <p>输入产品、增长、FDE 或自动化问题，系统会按 OPC 三引擎拆成可执行建议。适合做每日决策、周复盘、产品取舍和服务报价打磨。</p>
+                    <div class="prompt-chips" aria-label="快捷问题">
+                        <button type="button" data-prompt="帮我按 OPC 三引擎复盘今天该推进什么。">今日复盘</button>
+                        <button type="button" data-prompt="帮我为 FDE 高客单服务生成一个英文 offer。">生成 FDE Offer</button>
+                        <button type="button" data-prompt="帮我从 A19 产品矩阵里选本周最值得推进的一个方向。">选择 A19 方向</button>
+                    </div>
+                </div>
+                <div class="chat-panel" aria-label="AI Growth OS 聊天窗口">
+                    <div class="messages" id="messages" aria-live="polite"></div>
+                    <form class="input-area" id="chatForm">
+                        <textarea id="userInput" rows="1" placeholder="输入你的 OPC / A19 / FDE / Growth OS 问题"></textarea>
+                        <button type="submit">发送</button>
+                    </form>
+                </div>
+            </div>
+        </section>
+    </main>
 
     <script>
-        // 在 script 标签开始部分添加
-        const STORAGE_KEY = 'ai_coach_history';
-        
-        // 修改 conversationHistory 初始化方式
-        let conversationHistory = JSON.parse(localStorage.getItem(STORAGE_KEY)) || [
-            { role: "system", content: "你是一位专业的人生教练，需要通过对话帮助用户成长。使用亲切的中文，每次回答不超过200字。" }
-        ];
-        
-        // 在页面加载时加载历史消息
-        window.onload = () => {
-            conversationHistory.filter(msg => msg.role !== 'system').forEach(msg => {
-                appendMessage(msg.role, msg.content);
-            });
+        const STORAGE_KEY = 'opc_growth_os_history';
+        const initialSystemPrompt = {
+            role: 'system',
+            content: '你是张晓萌的 OPC 总控系统助手。请围绕 A19 产品矩阵、FDE 高客单现金流、AI Growth OS 自动增长来回答。每次先给出判断，再给出 3-5 个可执行动作。中文回答，简洁、有运营优先级。'
         };
-        
-        // 修改 sendMessage 函数中的保存逻辑
-        async function sendMessage() {
-            const userInput = document.getElementById('userInput');
-            const message = userInput.value.trim();
-            if (!message) return;
 
-            // 添加用户消息
-            appendMessage('user', message);
-            conversationHistory.push({ role: "user", content: message });
-            userInput.value = '';
+        let conversationHistory = JSON.parse(localStorage.getItem(STORAGE_KEY)) || [initialSystemPrompt];
+        const messagesDiv = document.getElementById('messages');
+        const userInput = document.getElementById('userInput');
+        const chatForm = document.getElementById('chatForm');
 
-            // 显示加载状态
-            // 修改消息添加方式
-            const loadingElem = safeAppendMessage('assistant', '思考中...');
-            if (!loadingElem) return;
-
-            try {
-                // 添加超时处理
-                const controller = new AbortController();
-                const timeoutId = setTimeout(() => controller.abort(), 60000);
-
-                const response = await fetch('/api/chat', {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({ messages: conversationHistory }),
-                    signal: controller.signal
-                });
-                clearTimeout(timeoutId);
-
-                // 强化流式处理
-                const reader = response.body.getReader();
-                let fullResponse = '';
-                loadingElem.textContent = '';
-                
-                while (true) {
-                    const { done, value } = await reader.read();
-                    if (done) break;
-                    const chunk = new TextDecoder().decode(value);
-                    
-                    // 修改后的数据块处理逻辑
-                    chunk.split('\n').forEach(line => {
-                        const trimmedLine = line.trim();
-                        if (!trimmedLine || trimmedLine === 'data: [DONE]') return;
-                        
-                        try {
-                            // 移除 "data: " 前缀
-                            const jsonString = trimmedLine.replace(/^data: /, '');
-                            const data = JSON.parse(jsonString);
-                            // 添加空值检查
-                            const content = data.choices[0]?.delta?.content || '';
-                            fullResponse += content;
-                            // 实时更新内容
-                            loadingElem.textContent = fullResponse; 
-                        } catch(e) {
-                            console.warn('解析错误:', e);
-                            console.log('原始数据:', line);
-                        }
-                    });
-                }
-                
-                conversationHistory.push({ role: "assistant", content: fullResponse });
-                // 添加保存到本地存储
-                localStorage.setItem(STORAGE_KEY, JSON.stringify(conversationHistory));
-                
-            } catch (error) {
-                // 细化错误处理
-                loadingElem.textContent = error.name === 'AbortError' ? 
-                    '请求超时，请稍后再试' : 
-                    '服务暂时不可用，请检查网络连接';
-            }
+        function persistHistory() {
+            localStorage.setItem(STORAGE_KEY, JSON.stringify(conversationHistory));
         }
 
-        // 修改 appendMessage 函数支持自动滚动
-        // 将 appendMessage 移到 safeAppendMessage 之前
         function appendMessage(role, content) {
-            const messagesDiv = document.getElementById('messages');
             const messageDiv = document.createElement('div');
             messageDiv.className = `message ${role}`;
             messageDiv.textContent = content;
@@ -119,37 +239,35 @@
             messagesDiv.scrollTop = messagesDiv.scrollHeight;
             return messageDiv;
         }
-        
-        // 修改 safeAppendMessage 定义
-        function safeAppendMessage(role, content) {
-            try {
-                return appendMessage(role, content);
-            } catch (error) {
-                console.error('消息添加失败:', error);
-                return null;
-            }
-        }
 
-        async function sendMessage() {
-            const userInput = document.getElementById('userInput');
-            const message = userInput.value.trim();
-            if (!message) return;
-
-            // 添加用户消息
-            appendMessage('user', message);
-            conversationHistory.push({ role: "user", content: message });
-            userInput.value = '';
-
-            // 显示加载状态
-            // 修改消息添加方式
-            const loadingElem = safeAppendMessage('assistant', '思考中...');
-            if (!loadingElem) {
-                console.error('无法创建加载状态');
+        function hydrateMessages() {
+            const visibleMessages = conversationHistory.filter((msg) => msg.role !== 'system');
+            if (visibleMessages.length === 0) {
+                appendMessage('assistant', '欢迎进入 OPC 总控系统。你可以问：今天该推进哪个产品、FDE offer 怎么写、AI Growth OS 该自动化什么。');
                 return;
             }
+            visibleMessages.forEach((msg) => appendMessage(msg.role, msg.content));
+        }
+
+        function resizeInput() {
+            userInput.style.height = 'auto';
+            userInput.style.height = `${Math.min(userInput.scrollHeight, 150)}px`;
+        }
+
+        async function sendMessage(message) {
+            const cleanMessage = message.trim();
+            if (!cleanMessage) return;
+
+            appendMessage('user', cleanMessage);
+            conversationHistory.push({ role: 'user', content: cleanMessage });
+            persistHistory();
+
+            userInput.value = '';
+            resizeInput();
+
+            const loadingElem = appendMessage('assistant', '正在生成运营建议...');
 
             try {
-                // 添加超时处理
                 const controller = new AbortController();
                 const timeoutId = setTimeout(() => controller.abort(), 60000);
 
@@ -159,89 +277,73 @@
                     body: JSON.stringify({ messages: conversationHistory }),
                     signal: controller.signal
                 });
+
                 clearTimeout(timeoutId);
 
-                // 强化流式处理
+                if (!response.ok || !response.body) {
+                    throw new Error(`请求失败：${response.status}`);
+                }
+
                 const reader = response.body.getReader();
                 let fullResponse = '';
                 loadingElem.textContent = '';
-                
+
                 while (true) {
                     const { done, value } = await reader.read();
                     if (done) break;
+
                     const chunk = new TextDecoder().decode(value);
-                    
-                    // 修改后的数据块处理逻辑
-                    chunk.split('\n').forEach(line => {
+                    chunk.split('\n').forEach((line) => {
                         const trimmedLine = line.trim();
                         if (!trimmedLine || trimmedLine === 'data: [DONE]') return;
-                        
+
                         try {
-                            // 移除 "data: " 前缀
-                            const jsonString = trimmedLine.replace(/^data: /, '');
+                            const jsonString = trimmedLine.replace(/^data:\s*/, '');
                             const data = JSON.parse(jsonString);
-                            // 添加空值检查
-                            const content = data.choices[0]?.delta?.content || '';
+                            const content = data.choices?.[0]?.delta?.content || '';
                             fullResponse += content;
-                            // 实时更新内容
-                            loadingElem.textContent = fullResponse; 
-                        } catch(e) {
-                            console.warn('解析错误:', e);
-                            console.log('原始数据:', line);
+                            loadingElem.textContent = fullResponse;
+                            messagesDiv.scrollTop = messagesDiv.scrollHeight;
+                        } catch (error) {
+                            console.warn('跳过无法解析的数据块:', line);
                         }
                     });
                 }
-                
-                conversationHistory.push({ role: "assistant", content: fullResponse });
-                // 添加保存到本地存储
-                localStorage.setItem(STORAGE_KEY, JSON.stringify(conversationHistory));
-                
+
+                const finalResponse = fullResponse || '暂时没有生成内容，请稍后再试。';
+                loadingElem.textContent = finalResponse;
+                conversationHistory.push({ role: 'assistant', content: finalResponse });
+                persistHistory();
             } catch (error) {
-                // 细化错误处理
-                loadingElem.textContent = error.name === 'AbortError' ? 
-                    '请求超时，请稍后再试' : 
-                    '服务暂时不可用，请检查网络连接';
+                loadingElem.textContent = error.name === 'AbortError'
+                    ? '请求超时，请稍后再试。'
+                    : '服务暂时不可用，请检查本地服务或上游模型配置。';
             }
         }
 
-        const userInput = document.getElementById('userInput');
-        userInput.addEventListener('keypress', (e) => {
-            if (e.key === 'Enter' && !e.shiftKey) {
-                e.preventDefault();
-                sendMessage();
+        chatForm.addEventListener('submit', (event) => {
+            event.preventDefault();
+            sendMessage(userInput.value);
+        });
+
+        userInput.addEventListener('input', resizeInput);
+        userInput.addEventListener('keydown', (event) => {
+            if (event.key === 'Enter' && !event.shiftKey) {
+                event.preventDefault();
+                chatForm.requestSubmit();
             }
         });
-        
-        // 添加历史记录管理功能
-        function refreshHistoryPanel() {
-            const historyList = document.getElementById('historyList');
-            historyList.innerHTML = conversationHistory
-                .filter(msg => msg.role === 'user')
-                .map((msg, index) => 
-                    `<div class="history-item" onclick="loadHistory(${index})">
-                        ${msg.content.substring(0, 20)}${msg.content.length > 20 ? '...' : ''}
-                    </div>`
-                )
-                .join('');
-        }
-        
-        function loadHistory(index) {
-            const messagesDiv = document.getElementById('messages');
-            messagesDiv.innerHTML = '';
-            conversationHistory.slice(0, index + 2).forEach(msg => {
-                if(msg.role !== 'system') appendMessage(msg.role, msg.content);
+
+        document.querySelectorAll('[data-prompt]').forEach((button) => {
+            button.addEventListener('click', () => {
+                userInput.value = button.dataset.prompt;
+                resizeInput();
+                userInput.focus();
             });
-        }
-        
-        function clearHistory() {
-            localStorage.removeItem(STORAGE_KEY);
-            conversationHistory = conversationHistory.slice(0, 1);
-            refreshHistoryPanel();
-            document.getElementById('messages').innerHTML = '';
-        }
-        
-        // 在 sendMessage 函数最后添加
-        refreshHistoryPanel();
+        });
+
+        hydrateMessages();
+        resizeInput();
     </script>
 </body>
 </html>
