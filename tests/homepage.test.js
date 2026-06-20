@@ -72,10 +72,36 @@ test('ships every local image referenced by the homepage', () => {
   }
 });
 
+test('uses the original 1024px artwork for all five app icons', () => {
+  const iconFiles = [
+    'deepcleanup-ios.png',
+    'deepcleanup-mac.png',
+    'focuslock.png',
+    'longshot.png',
+    'lifelog.png',
+  ];
+
+  for (const iconFile of iconFiles) {
+    const png = fs.readFileSync(path.join(publicDir, 'assets', 'icons', iconFile));
+    assert.equal(png.readUInt32BE(16), 1024, `${iconFile} width`);
+    assert.equal(png.readUInt32BE(20), 1024, `${iconFile} height`);
+  }
+});
+
+test('keeps the social preview at the declared Open Graph dimensions', () => {
+  const png = fs.readFileSync(path.join(publicDir, 'assets', 'homepage-og.png'));
+  assert.equal(png.readUInt32BE(16), 1200);
+  assert.equal(png.readUInt32BE(20), 630);
+});
+
 test('presents the X profile and current AI-native positioning instead of the old resume link', () => {
   assert.ok(html.includes('href="https://x.com/x_autonomy"'));
   assert.ok(html.includes('X · @x_autonomy'));
   assert.ok(html.includes('AI-native iOS/FDE engineer. I help founders ship AI apps to the App Store with subscriptions, paywalls, analytics, and automation. Building A19 + AI Growth OS.'));
   assert.ok(!html.includes('personGithub.html'));
   assert.ok(!html.includes('Résumé'));
+});
+
+test('keeps the public homepage English-only', () => {
+  assert.equal(/[\u3400-\u9fff]/u.test(html), false);
 });

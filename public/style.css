@@ -349,6 +349,7 @@ h1 em, h2 em { color: var(--muted); font-style: normal; font-weight: inherit; }
 .about h2 { margin: 0; }
 .about-copy { padding-top: 34px; }
 .about-copy p { max-width: 650px; color: var(--ink-2); font-size: 20px; line-height: 1.55; letter-spacing: -.02em; }
+.about-copy .positioning-note { padding: 18px 20px; border-left: 3px solid var(--blue); border-radius: 0 18px 18px 0; color: #303034; background: rgba(255,255,255,.62); font-size: 16px; line-height: 1.6; }
 .about-copy .about-cn { color: #8e8e93; font-size: 14px; line-height: 1.8; }
 .metrics { grid-column: 1/-1; display: grid; grid-template-columns: repeat(3,1fr); border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); }
 .metrics div { min-height: 190px; padding: 32px; display: flex; align-items: flex-end; gap: 18px; border-right: 1px solid var(--line); }.metrics div:last-child { border-right: 0; }
